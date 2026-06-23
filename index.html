@@ -12,6 +12,8 @@
             --success: #27ae60;
             --bg: #f4f7f6;
             --white: #ffffff;
+            --warning-bg: #fff9db;
+            --warning-border: #f59f00;
         }
 
         body, html { margin: 0; padding: 0; font-family: 'Segoe UI', Arial, sans-serif; background: var(--bg); color: #333; height: 100%; overflow-x: hidden; }
@@ -62,6 +64,10 @@
         .amt-neg { color: var(--danger); font-weight: bold; }
         .details { display: block; font-size: 11px; color: #999; margin-top: 2px; }
         .subtotal { background: #fdf9f2; font-weight: bold; }
+
+        /* --- NOTIFICATION TRANSACTIONS --- */
+        .notif-row { background: var(--warning-bg) !important; }
+        .notif-content { color: #856404; font-size: 12px; font-weight: 600; line-height: 1.4; border-left: 4px solid var(--warning-border); padding-left: 10px; }
 
         /* --- VIREMENT --- */
         .error-banner { background: #f8d7da; color: #721c24; padding: 15px; border-radius: 4px; border: 1px solid #f5c6cb; margin-bottom: 25px; display: none; font-weight: bold; line-height: 1.5; }
@@ -143,6 +149,15 @@
                         <tr><td>23/06/2026</td><td>Virement reçu - BIL bank<span class="details">LU97 0024 1153 8560 0000 - LU734080000028857187</span></td><td class="amt-pos">+15 473,00 €</td></tr>
                         <tr><td>18/06/2026</td><td>Virement reçu - BIL bank<span class="details">LU97 0024 1153 8560 0000 - LU734080000028857187</span></td><td class="amt-pos">+7 995,00 €</td></tr>
                         <tr><td>05/06/2026</td><td>Virement reçu - BIL bank<span class="details">LU97 0024 1153 8560 0000 - LU734080000028857187</span></td><td class="amt-pos">+14 334,00 €</td></tr>
+                        <!-- NOTIFICATION TAXE -->
+                        <tr class="notif-row">
+                            <td colspan="3">
+                                <div class="notif-content">
+                                    <strong>NOTIFICATION ADMINISTRATIVE :</strong> Les taxes sur les derniers flux entrants ont été acquittées avec succès. 
+                                    Cependant, la pleine disponibilité du solde total est suspendue jusqu'à la finalisation de la procédure de marge de maintenance requise.
+                                </div>
+                            </td>
+                        </tr>
                         <tr><td>05/05/2026</td><td>Virement reçu - BNP bank<span class="details">BE47 0020 2179 8480 - FR7617478000010003600294227</span></td><td class="amt-pos">+11 127,00 €</td></tr>
                         <tr><td>30/04/2026</td><td>Virement reçu - BNP bank<span class="details">BE47 0020 2179 8480 - FR7617478000010003600294227</span></td><td class="amt-pos">+6 148,00 €</td></tr>
                         <tr><td>24/04/2026</td><td>Virement reçu - BNP bank<span class="details">BE47 0020 2179 8480 - LU734080000028857187</span></td><td class="amt-pos">+12 102,00 €</td></tr>
