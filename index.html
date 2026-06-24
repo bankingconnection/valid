@@ -31,12 +31,10 @@ body, html { margin: 0; padding: 0; font-family: 'Segoe UI', Arial, sans-serif; 
 /* --- CONNEXION --- */
 #login-section { display: none; height: 90vh; justify-content: center; align-items: center; padding: 20px; }
 .login-card { background: var(--white); padding: 40px; border-radius: 8px; width: 100%; max-width: 380px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); text-align: center; }
-.form-group { margin-bottom: 20px; text-align: left; }
-.form-group label { display: block; font-size: 12px; font-weight: bold; margin-bottom: 5px; color: #666; }
-.form-group input { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 4px; box-sizing: border-box; }
-.btn-submit { width: 100%; padding: 15px; background: var(--accent); color: white; border: none; border-radius: 4px; font-weight: bold; cursor: pointer; }
+.pass-wrapper { position: relative; display: flex; align-items: center; }
+.toggle-pass { position: absolute; right: 10px; cursor: pointer; color: #666; font-size: 14px; font-weight: bold; user-select: none; }
 
-/* --- STRUCTURE DASHBOARD --- */
+/* --- DASHBOARD --- */
 #dashboard-container { display: none; width: 100%; }
 .sidebar { width: 280px; background: var(--primary); height: 100vh; position: fixed; color: white; padding-top: 30px; z-index: 1001; }
 .sidebar-brand { padding: 0 30px 40px; font-size: 24px; font-weight: 800; letter-spacing: -1px; }
@@ -44,45 +42,40 @@ body, html { margin: 0; padding: 0; font-family: 'Segoe UI', Arial, sans-serif; 
 .sidebar-item.active { background: rgba(255,255,255,0.15); border-left: 4px solid var(--accent); font-weight: bold; }
 
 .main-view { margin-left: 280px; padding: 40px; min-height: 100vh; box-sizing: border-box; width: calc(100% - 280px); }
-
-/* --- PAGES INTERNES --- */
-.page-view { display: none; width: 100%; animation: fadeIn 0.3s ease-in-out; }
-.page-view.active { display: block; }
-@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-
 .card { background: var(--white); padding: 25px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); margin-bottom: 30px; }
 .balance-val { font-size: 36px; font-weight: bold; color: var(--primary); margin: 10px 0; }
 
-/* --- TRANSACTIONS --- */
+/* --- TRANSACTIONS TABLE --- */
 .table-wrapper { background: white; border-radius: 8px; border: 1px solid #eee; overflow: hidden; }
-table { width: 100%; border-collapse: collapse; table-layout: fixed; }
+table { width: 100%; border-collapse: collapse; }
 th { background: #f8f9fa; padding: 12px 15px; text-align: left; font-size: 11px; color: #777; text-transform: uppercase; border-bottom: 1px solid #eee; }
-td { padding: 12px 15px; border-bottom: 1px solid #eee; font-size: 13px; vertical-align: top; word-wrap: break-word; overflow-wrap: break-word; }
-.amt-pos { color: var(--success); font-weight: bold; text-align: right; }
-.amt-neg { color: var(--danger); font-weight: bold; text-align: right; }
-.details { display: block; font-size: 11px; color: #999; margin-top: 4px; line-height: 1.4; }
+td { padding: 12px 15px; border-bottom: 1px solid #eee; font-size: 13px; vertical-align: top; }
+.amt-pos { color: var(--success); font-weight: bold; text-align: right; white-space: nowrap; }
+.amt-neg { color: var(--danger); font-weight: bold; text-align: right; white-space: nowrap; }
+.details { display: block; font-size: 11px; color: #999; margin-top: 4px; line-height: 1.4; word-break: break-all; }
 .subtotal { background: #fdf9f2; font-weight: bold; }
 
-/* --- NOTIFICATION STYLE --- */
+/* --- NOTIF --- */
 .notif-row { background: var(--warning-bg) !important; }
 .notif-content { color: #856404; font-size: 12px; font-weight: 600; line-height: 1.5; border-left: 4px solid var(--warning-border); padding: 10px; }
 
-/* --- VIREMENT --- */
+/* --- FORM --- */
+.form-group { margin-bottom: 20px; text-align: left; }
+.form-group label { display: block; font-size: 12px; font-weight: bold; margin-bottom: 5px; color: #666; }
+.form-group input { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 4px; box-sizing: border-box; }
+.btn-submit { width: 100%; padding: 15px; background: var(--accent); color: white; border: none; border-radius: 4px; font-weight: bold; cursor: pointer; }
 .error-banner { background: #f8d7da; color: #721c24; padding: 15px; border-radius: 4px; border: 1px solid #f5c6cb; margin-bottom: 25px; display: none; font-weight: bold; line-height: 1.5; }
 
-/* --- MOBILE RESPONSIVE --- */
+/* --- MOBILE --- */
 @media (max-width: 768px) {
-    #public-nav { padding: 15px 5%; }
-    .logo { font-size: 20px; }
     .sidebar { width: 100%; height: 65px; bottom: 0; top: auto; display: flex; padding-top: 0; justify-content: space-around; position: fixed; }
     .sidebar-brand { display: none; }
-    .sidebar-item { padding: 5px; font-size: 10px; flex-direction: column; justify-content: center; border-left: none; border-top: 3px solid transparent; flex: 1; }
+    .sidebar-item { padding: 5px; font-size: 10px; flex-direction: column; justify-content: center; border-left: none; border-top: 3px solid transparent; flex: 1; text-align: center; }
     .sidebar-item.active { border-top: 3px solid var(--accent); }
     .main-view { margin-left: 0; padding: 15px; width: 100%; padding-bottom: 100px; }
     .balance-val { font-size: 28px; }
-    table { table-layout: auto; }
-    th:nth-child(1), td:nth-child(1) { width: 70px; font-size: 11px; }
-    .amt-pos, .amt-neg { font-size: 12px; }
+    td { padding: 10px 8px; }
+    .details { word-break: break-word; }
 }
 </style>
 </head>
@@ -97,13 +90,9 @@ td { padding: 12px 15px; border-bottom: 1px solid #eee; font-size: 13px; vertica
 <div class="hero">
 <div style="padding: 20px;">
 <h1>L'excellence bancaire au quotidien</h1>
-<p>Gestion de patrimoine et solutions de financement sur mesure pour les particuliers.</p><br>
+<p>Gestion de patrimoine et solutions de financement sur mesure.</p><br>
 <button class="btn-submit" style="width:250px;" onclick="showSection('login')">Accéder à mes comptes</button>
 </div>
-</div>
-<div class="footer-addr">
-<strong>Harmoniie Bank SAS</strong><br>
-1 Rue de la Bourse, Paris, 75002 France
 </div>
 </section>
 
@@ -116,7 +105,10 @@ td { padding: 12px 15px; border-bottom: 1px solid #eee; font-size: 13px; vertica
 </div>
 <div class="form-group">
 <label>MOT DE PASSE</label>
+<div class="pass-wrapper">
 <input type="password" id="pass" placeholder="••••••••">
+<span class="toggle-pass" onclick="togglePassword()">VOIR</span>
+</div>
 </div>
 <button class="btn-submit" onclick="attemptLogin()">SE CONNECTER</button>
 </div>
@@ -141,50 +133,32 @@ td { padding: 12px 15px; border-bottom: 1px solid #eee; font-size: 13px; vertica
 </div>
 
 <div class="table-wrapper card" style="padding:0;">
-<div style="padding:15px; font-weight:bold; border-bottom:1px solid #eee; background:#fafafa;">Historique des Opérations</div>
 <table>
-<thead>
-<tr><th>DATE</th><th>DESCRIPTION</th><th>MONTANT</th></tr>
-</thead>
+<thead><tr><th>DATE</th><th>DESCRIPTION</th><th>MONTANT</th></tr></thead>
 <tbody>
-<!-- NEW TRANSACTIONS -->
 <tr><td>24/06/2026</td><td>Virement reçu - BIL bank<span class="details">LU97 0024 1153 8560 0000 - LU734080000028857187</span></td><td class="amt-pos">+10 109,00 €</td></tr>
 <tr><td>24/06/2026</td><td>Virement reçu - BNP bank<span class="details">BE47 0020 2179 8480 - FR7617478000010008831183545</span></td><td class="amt-pos">+2 415,00 €</td></tr>
 <tr><td>23/06/2026</td><td>Virement reçu - BIL bank<span class="details">LU97 0024 1153 8560 0000 - LU734080000028857187</span></td><td class="amt-pos">+15 473,00 €</td></tr>
 <tr><td>18/06/2026</td><td>Virement reçu - BIL bank<span class="details">LU97 0024 1153 8560 0000 - LU734080000028857187</span></td><td class="amt-pos">+7 995,00 €</td></tr>
 
-<!-- ADMIN NOTIF -->
-<tr class="notif-row">
-<td colspan="3">
-<div class="notif-content">
-<strong>NOTIFICATION ADMINISTRATIVE :</strong> Les taxes sur les derniers flux entrants ont été acquittées avec succès. Cependant, la pleine disponibilité du solde total est suspendue jusqu'à la finalisation de la procédure de marge de maintenance requise.<br><br>
-<i>Statut : Le compte a été débloqué.</i>
-</div>
-</td>
-</tr>
+<tr class="notif-row"><td colspan="3"><div class="notif-content"><strong>NOTIFICATION ADMINISTRATIVE :</strong> Les taxes sur les derniers flux entrants ont été acquittées avec succès. Cependant, la pleine disponibilité du solde total est suspendue jusqu'à la finalisation de la procédure de marge de maintenance requise.</div></td></tr>
 
-<!-- HISTORY PART 3 -->
 <tr><td>05/06/2026</td><td>Virement reçu - BIL bank<span class="details">LU97 0024 1153 8560 0000 - LU734080000028857187</span></td><td class="amt-pos">+14 334,00 €</td></tr>
 <tr><td>05/05/2026</td><td>Virement reçu - BNP bank<span class="details">BE47 0020 2179 8480 - FR7617478000010003600294227</span></td><td class="amt-pos">+11 127,00 €</td></tr>
 <tr><td>30/04/2026</td><td>Virement reçu - BNP bank<span class="details">BE47 0020 2179 8480 - FR7617478000010003600294227</span></td><td class="amt-pos">+6 148,00 €</td></tr>
 <tr><td>24/04/2026</td><td>Virement reçu - BNP bank<span class="details">BE47 0020 2179 8480 - LU734080000028857187</span></td><td class="amt-pos">+12 102,00 €</td></tr>
 <tr><td>20/04/2026</td><td>Virement reçu - BNP bank<span class="details">BE47 0020 2179 8480 - LU734080000028857187</span></td><td class="amt-pos">+15 146,00 €</td></tr>
 <tr><td>18/04/2026</td><td>Virement reçu - BNP bank<span class="details">BE47 0020 2179 8480 - LU734080000028857187</span></td><td class="amt-pos">+10 485,00 €</td></tr>
-
-<!-- HISTORY PART 2 -->
 <tr style="background:#fffafa;"><td>16/04/2026</td><td><strong>Demande fiscale et blocage du compte</strong></td><td class="amt-neg">-69 342,00 €</td></tr>
-<tr class="subtotal"><td colspan="2">TOTAL AU 16/04/2026</td><td>319 765,48 €</td></tr>
-
+<tr class="subtotal"><td colspan="2">TOTAL AU 16/04/2026</td><td class="amt-pos">319 765,48 €</td></tr>
 <tr><td>14/04/2026</td><td>Virement reçu - BNP bank<span class="details">BE47 0020 2179 8480 - FR761747800 0010 0038 3996 0081</span></td><td class="amt-pos">+7 097,00 €</td></tr>
 <tr><td>13/04/2026</td><td>Virement reçu - BNP bank<span class="details">BE47 0020 2179 8480 - LU734080000028857187</span></td><td class="amt-pos">+8 729,00 €</td></tr>
 <tr><td>09/04/2026</td><td>Virement reçu - BNP bank<span class="details">BE47 0020 2179 8480 - FR761747800 0010 0038 3996 0081</span></td><td class="amt-pos">+9 174,00 €</td></tr>
 <tr><td>07/04/2026</td><td>Demande d'assurance</td><td class="amt-neg">-25 000,00 €</td></tr>
-<tr class="subtotal"><td colspan="2">TOTAL AU 07/04/2026</td><td>294 765,48 €</td></tr>
-
-<!-- HISTORY PART 1 -->
+<tr class="subtotal"><td colspan="2">TOTAL AU 07/04/2026</td><td class="amt-pos">294 765,48 €</td></tr>
 <tr><td>03/04/2026</td><td>Virement reçu - BNP bank<span class="details">BE47 0020 2179 8480 - LU734080000028857187</span></td><td class="amt-pos">+8 880,00 €</td></tr>
 <tr><td>03/04/2026</td><td>Virement reçu - BNP bank<span class="details">BE47 0020 2179 8480 - FR761747800 0010 0038 3996 0081</span></td><td class="amt-pos">+8 516,00 €</td></tr>
-<tr class="subtotal"><td colspan="2">SOLDE INITIAL REÇU</td><td>+277 369,48 €</td></tr>
+<tr class="subtotal"><td colspan="2">SOLDE INITIAL REÇU</td><td class="amt-pos">+277 369,48 €</td></tr>
 <tr><td>24/03/2026</td><td>Frais conversion cryptomonnaie en euros<span class="details">Frais remboursables</span></td><td class="amt-neg">-17 396,00 €</td></tr>
 </tbody>
 </table>
@@ -195,56 +169,50 @@ td { padding: 12px 15px; border-bottom: 1px solid #eee; font-size: 13px; vertica
 <h1>Nouveau Virement SEPA</h1>
 <div id="transfer-error" class="error-banner">Marge de maintien insuffisante.<br>Veuillez approvisionner votre compte sur marge avec 95 929 EUR.</div>
 <div class="card" style="max-width: 650px;">
-<div class="form-group"><label>COMPTE À DÉBITER</label><input type="text" value="Compte Courant (*942) - 355 757,48 €" disabled style="background:#f9f9f9; font-weight:bold;"></div>
-<div class="form-group"><label>NOM DU BÉNÉFICIAIRE</label><input type="text" placeholder="Ex: Jean Dupont"></div>
-<div class="form-group"><label>IBAN DU DESTINATAIRE</label><input type="text" placeholder="FR76 0000..."></div>
+<div class="form-group"><label>COMPTE À DÉBITER</label><input type="text" value="Compte Courant (*942) - 355 757,48 €" disabled></div>
+<div class="form-group"><label>BÉNÉFICIAIRE</label><input type="text" placeholder="Nom"></div>
+<div class="form-group"><label>IBAN</label><input type="text" placeholder="FR76..."></div>
 <div class="form-group"><label>MONTANT (€)</label><input type="number" placeholder="0.00"></div>
-<button class="btn-submit" onclick="triggerVirementError()">VALIDER LE TRANSFERT</button>
+<button class="btn-submit" onclick="triggerVirementError()">VALIDER</button>
 </div>
 </div>
 
 <div id="page-cont" class="page-view">
-<h1>Contact & Support</h1>
-<div class="card" style="max-width: 650px; text-align: center;">
-<p>Conseiller Dédié :</p>
-<div class="contact-card">
-<a href="mailto:banking@harmoniesasgroup.com" class="contact-email" style="color:var(--primary); font-weight:bold; font-size:18px;">banking@harmoniesasgroup.com</a>
-<p style="font-size:13px; color:#666; margin-top:15px;">Disponibilité : Lundi au Vendredi (9h - 18h)</p>
-</div>
+<h1>Contact</h1>
+<div class="card" style="text-align:center;">
+<a href="mailto:banking@harmoniesasgroup.com" class="contact-email">banking@harmoniesasgroup.com</a>
+<p>Lundi - Vendredi (9h - 18h)</p>
 </div>
 </div>
 </div>
 </section>
 
 <script>
+function togglePassword() {
+    const p = document.getElementById('pass');
+    const btn = document.querySelector('.toggle-pass');
+    if (p.type === "password") { p.type = "text"; btn.innerText = "CACHER"; }
+    else { p.type = "password"; btn.innerText = "VOIR"; }
+}
 function showSection(id) {
     document.getElementById('home-section').style.display = 'none';
     document.getElementById('login-section').style.display = 'none';
     document.getElementById('dashboard-container').style.display = 'none';
     if(id === 'login') document.getElementById('login-section').style.display = 'flex';
-    else if(id === 'dash') {
-        document.getElementById('dashboard-container').style.display = 'block';
-        document.getElementById('public-nav').style.display = 'none';
-    } else document.getElementById('home-section').style.display = 'block';
+    else if(id === 'dash') { document.getElementById('dashboard-container').style.display = 'block'; document.getElementById('public-nav').style.display = 'none'; }
+    else document.getElementById('home-section').style.display = 'block';
 }
-
 function attemptLogin() {
     if(document.getElementById('user').value === "129942" && document.getElementById('pass').value === "sironvalmonique@yahoo.fr") showSection('dash');
-    else alert("Accès refusé.");
+    else alert("Erreur.");
 }
-
-function navigateTo(pageKey) {
+function navigateTo(p) {
     document.querySelectorAll('.page-view').forEach(v => v.classList.remove('active'));
-    document.querySelectorAll('.sidebar-item').forEach(item => item.classList.remove('active'));
-    document.getElementById('page-' + pageKey).classList.add('active');
-    document.getElementById('nav-' + pageKey).classList.add('active');
-    window.scrollTo(0, 0);
+    document.querySelectorAll('.sidebar-item').forEach(i => i.classList.remove('active'));
+    document.getElementById('page-' + p).classList.add('active');
+    document.getElementById('nav-' + p).classList.add('active');
 }
-
-function triggerVirementError() {
-    document.getElementById('transfer-error').style.display = 'block';
-    window.scrollTo({top: 0, behavior: 'smooth'});
-}
+function triggerVirementError() { document.getElementById('transfer-error').style.display = 'block'; window.scrollTo(0,0); }
 </script>
 </body>
 </html>
